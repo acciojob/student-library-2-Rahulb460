@@ -2,6 +2,7 @@ package com.driver.services;
 
 import com.driver.models.Author;
 import com.driver.models.Book;
+import com.driver.models.Genre;
 import com.driver.repositories.AuthorRepository;
 import com.driver.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class BookService {
     AuthorRepository authorRepository1;
 
     public void createBook(Book book){
+
+
         //Save the author in book
 
         int authorId = book.getAuthor().getId();
@@ -31,12 +34,19 @@ public class BookService {
 
         //Updated the book
         book.setAuthor(author);
+        //bookRepository2.save(book);
         bookRepository2.save(book);
 
         authorRepository1.save(author);
+
+
+
     }
 
-    public List<Book> getBooks(String genre, boolean available, String author){
+    //This has to be rectified....and given a thought
+
+    public List<Book> getBooks(Genre genre, boolean available, String author){
+
 
         if(genre != null && author != null){
             return bookRepository2.findBooksByGenreAuthor(genre, author, available);
